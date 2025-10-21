@@ -43,29 +43,16 @@ async function createTempFirebaseAuth() {
     const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
     const { getAuth } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
     
-    const firebaseConfig = {
-      apiKey: "AIzaSyBOQb2bEFlqT-sLcpmPpHzo1-XP0BH5p-4",
-      authDomain: "preplyai-976e9.firebaseapp.com",
-      projectId: "preplyai-976e9",
-      storageBucket: "preplyai-976e9.appspot.com",
-      messagingSenderId: "58362314305",
-      appId: "1:58362314305:web:4116635820a6c0df1050c0"
-    };
+    // SECURITY: Never hardcode Firebase config in scripts
+    // Use environment variables or get from your .env file
+    console.error('❌ SECURITY WARNING: This script should not contain hardcoded Firebase credentials');
+    console.error('Please use environment variables or load from your .env file');
+    return null;
     
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    
-    console.log('Created temporary Firebase auth instance');
-    
-    if (auth.currentUser) {
-      const token = await auth.currentUser.getIdToken();
-      console.log('✅ Firebase Token:');
-      console.log(token);
-      return token;
-    } else {
-      console.log('❌ No user signed in. Please sign in first at http://localhost:3000');
-      return null;
-    }
+    // Function disabled for security - no hardcoded credentials
+    console.log('❌ This function is disabled for security reasons');
+    console.log('Please use the proper authentication flow in your application');
+    return null;
   } catch (error) {
     console.error('Error creating Firebase auth:', error);
     return null;
