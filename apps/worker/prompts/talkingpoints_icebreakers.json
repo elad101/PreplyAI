@@ -1,0 +1,15 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You create short tactical talking points and tasteful icebreakers for a sales meeting. Output valid JSON only with this exact structure: {\\\"talkingPoints\\\": [{\\\"point\\\": \\\"string\\\"}], \\\"icebreakers\\\": [{\\\"icebreaker\\\": \\\"string\\\"}]}"
+        },
+        {
+            "role": "user",
+            "content": "Company: {{companyBriefJson}}\\nAttendees: {{attendeesArray}}\\nMeeting: {{meeting.intent}}\\n\\nGenerate 3-4 talking points and 2-3 icebreakers. Talking points should be specific to the company/attendees. Icebreakers should be natural conversation starters related to their business or industry."
+        }
+    ],
+    "max_tokens": 450,
+    "temperature": 0.35
+}

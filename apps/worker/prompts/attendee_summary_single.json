@@ -1,0 +1,15 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a professional researcher who creates detailed attendee profiles for sales meetings. Extract meaningful information from email domains, names, and any available context. Make educated inferences about roles and industries based on email domains and company names. Output valid JSON only."
+        },
+        {
+            "role": "user",
+            "content": "Create an attendee profile for: Name: {{name}}, Email: {{email}}, Title: {{title}}, LinkedIn: {{linkedinUrl}}, Bio: {{publicBioText}}, Meeting Context: {{meetingContext}}\n\nAnalyze the email domain and company name to infer likely role and industry. For example:\n- @psscpas.com suggests accounting/finance professional\n- @getsauce.com suggests tech/startup employee\n- @gmail.com suggests personal email (infer from name)\n\nOutput JSON: {\n    \"name\": \"properly formatted name\",\n    \"title\": \"inferred or provided title\",\n    \"focusAreas\": [\"relevant areas of expertise\"],\n    \"recentHighlights\": \"recent achievements or notable items\",\n    \"summary\": \"2-3 sentence professional summary\",\n    \"confidence\": 0.7\n}"
+        }
+    ],
+    "max_tokens": 400,
+    "temperature": 0.3
+}

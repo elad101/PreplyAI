@@ -1,0 +1,15 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You produce short factual attendee summaries for sales briefings. Output strictly JSON: an array of objects. Avoid speculation. For unknown fields, use null. Include a confidence score 0.0-1.0."
+        },
+        {
+            "role": "user",
+            "content": "INPUT_JSON: {\n    \"attendees\": [\n    {\"name\": \"{{a1.name}}\", \"title\": \"{{a1.title}}\", \"email\": \"{{a1.email}}\", \"linkedinUrl\": \"{{a1.linkedinUrl}}\", \"publicBioText\": \"{{a1.publicBioText}}\" },\n    {\"name\": \"{{a2.name}}\", \"title\": \"{{a2.title}}\", \"email\": \"{{a2.email}}\", \"linkedinUrl\": \"{{a2.linkedinUrl}}\", \"publicBioText\": \"{{a2.publicBioText}}\" },\n    {\"name\": \"{{a3.name}}\", \"title\": \"{{a3.title}}\", \"email\": \"{{a3.email}}\", \"linkedinUrl\": \"{{a3.linkedinUrl}}\", \"publicBioText\": \"{{a3.publicBioText}}\" }\n    ],\n    \"meetingContext\": \"{{meetingContext}}\"\n    }\n    \n    \n    Return: [{\n    \"name\": string,\n    \"title\": string,\n    \"focusAreas\": [string],\n    \"recentHighlights\": string|null,\n    \"summary\": string (1-2 sentences),\n    \"confidence\": number (0.0-1.0)\n    }]"
+        }
+    ],
+    "max_tokens": 400,
+    "temperature": 0.2
+}

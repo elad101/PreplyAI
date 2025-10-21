@@ -1,0 +1,17 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+    { "role": "system", "content": "You create a compact list of high‑precision web search queries intended to find a public LinkedIn profile or public mentions for a person. Output only JSON." },
+    { "role": "user", "content": "INPUT_JSON: {
+    \"name\": \"{{fullname}}\",
+    \"email\": \"{{email}}\",
+    \"company\": \"{{company}}\",
+    \"extraHint\": \"{{locationOrTitle}}\"
+    }
+    
+    
+    Return: { \"queries\": [string], \"notes\": string }" }
+    ],
+    "max_tokens": 150,
+    "temperature": 0.0
+}

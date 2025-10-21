@@ -1,0 +1,32 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+    { "role": "system", "content": "You are a concise analyst that produces short, accurate company briefs intended for a sales rep. Produce only valid JSON following the schema exactly. Don't include any extra text. If data is missing, return nulls for fields." },
+    { "role": "user", "content": "INPUT_JSON: {
+    \"company\": {
+    \"name\": \"{{company.name}}\",
+    \"domain\": \"{{company.domain}}\",
+    \"aboutText\": \"{{company.aboutText}}\",
+    \"scrapedSnippets\": {{company.scrapedSnippets}}
+    },
+    \"meeting\": {
+    \"title\": \"{{meeting.title}}\",
+    \"description\": \"{{meeting.description}}\"
+    }
+    }
+    
+    
+    Return JSON: {
+    \"name\": string,
+    \"oneLine\": string (max 120 chars),
+    \"description\": string (50-180 chars),
+    \"products\": [string],
+    \"keySignals\": [string],
+    \"risks\": [string],
+    \"sources\": [string]
+    }" }
+    ],
+    "max_tokens": 300,
+    "temperature": 0.18,
+    "top_p": 1
+}

@@ -1,0 +1,22 @@
+{
+    "model": "gpt-4o-mini",
+    "messages": [
+    { "role": "system", "content": "You create short tactical talking points and tasteful icebreakers for a sales meeting. Output valid JSON only." },
+    { "role": "user", "content": "INPUT_JSON: {
+    \"companyBrief\": {{companyBriefJson}},
+    \"attendees\": {{attendeesArray}},
+    \"meetingIntent\": \"{{meeting.intent}}\",
+    \"product\": \"{{productName}}\",
+    \"tonePref\": \"{{tone}}\",
+    \"lengthPref\": \"{{length}}\"
+    }
+    
+    
+    Return JSON: {
+    \"talkingPoints\": [{\"bullet\": string (max 140 chars), \"rationale\": string (max 200 chars)}],
+    \"icebreakers\": [{\"line\": string (max 140 chars), \"whyItWorks\": string (max 120 chars)}]
+    }" }
+    ],
+    "max_tokens": 450,
+    "temperature": 0.35
+}

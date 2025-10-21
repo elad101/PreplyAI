@@ -1,0 +1,96 @@
+// Prisma schema for PreplyAI
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String             @id @default(uuid())
+  firebaseUid      String             @unique @map("firebase_uid")
+  email            String
+  displayName      String?            @map("display_name")
+  photoUrl         String?            @map("photo_url")
+  settings         Json               @default("{\"briefingQuality\": \"standard\", \"enableLinkedInEnrichment\": false, \"notificationsEnabled\": true}")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+  
+  googleConnection GoogleConnection?
+  meetings         Meeting[]
+
+  @@index([firebaseUid])
+  @@index([email])
+  @@map("users")
+}
+
+model GoogleConnection {
+  id           String   @id @default(uuid())
+  userId       String   @unique @map("user_id")
+  accessToken  String   @map("access_token")
+  refreshToken String   @map("refresh_token")
+  expiryDate   BigInt   @map("expiry_date")
+  scopes       String[]
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("google_connections")
+}
+
+model Meeting {
+  id             String       @id @default(uuid())
+  userId         String       @map("user_id")
+  googleEventId  String       @map("google_event_id")
+  summary        String?
+  description    String?
+  location       String?
+  startTime      DateTime     @map("start_time")
+  endTime        DateTime     @map("end_time")
+  organizer      Json?
+  attendees      Json         @default("[]")
+  conferenceData Json?        @map("conference_data")
+  htmlLink       String?      @map("html_link")
+  cachedAt       DateTime     @default(now()) @map("cached_at")
+  lastFetchedAt  DateTime     @default(now()) @map("last_fetched_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  aiBriefing AIBriefing?
+
+  @@unique([userId, googleEventId])
+  @@index([userId])
+  @@index([startTime])
+  @@index([googleEventId])
+  @@map("meetings")
+}
+
+model AIBriefing {
+  id               String   @id @default(uuid())
+  meetingId        String   @unique @map("meeting_id")
+  status           String   // 'processing', 'completed', 'failed'
+  jobId            String?  @map("job_id")
+  model            String?
+  company          Json?
+  attendees        Json     @default("[]")
+  talkingPoints    Json     @default("[]") @map("talking_points")
+  icebreakers      Json     @default("[]")
+  errorMessage     String?  @map("error_message")
+  lastGeneratedAt  DateTime @default(now()) @map("last_generated_at")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  
+  meeting Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@index([meetingId])
+  @@index([status])
+  @@index([jobId])
+  @@map("ai_briefings")
+}
+

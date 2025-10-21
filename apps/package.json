@@ -1,0 +1,35 @@
+{
+  "name": "@preplyai/apps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PreplyAI backend services workspace",
+  "scripts": {
+    "install:all": "cd api && npm install && cd ../worker && npm install",
+    "dev:api": "cd api && npm run dev",
+    "dev:worker": "cd worker && npm run dev",
+    "build:api": "cd api && npm run build",
+    "build:worker": "cd worker && npm run build",
+    "build:all": "npm run build:api && npm run build:worker",
+    "test:api": "cd api && npm test",
+    "test:worker": "cd worker && npm test",
+    "test:all": "npm run test:api && npm run test:worker",
+    "lint:api": "cd api && npm run lint",
+    "lint:worker": "cd worker && npm run lint",
+    "lint:all": "npm run lint:api && npm run lint:worker",
+    "type-check:api": "cd api && npm run type-check",
+    "type-check:worker": "cd worker && npm run type-check",
+    "type-check:all": "npm run type-check:api && npm run type-check:worker",
+    "setup:env": "node ../scripts/generate-session-secret.js",
+    "test:env:api": "node ../scripts/test-env.js api",
+    "test:env:worker": "node ../scripts/test-env.js worker"
+  },
+  "workspaces": [
+    "api",
+    "worker"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
+
